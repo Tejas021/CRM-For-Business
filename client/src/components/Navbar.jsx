@@ -14,6 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/reducers/auth';
 
 const drawerWidth = 240;
 const navItems = [{name:"Home",link:""},{name:"Tickets",link:"tickets"},{name:"Tasks",link:"tasks"}];
@@ -21,6 +23,7 @@ const navItems = [{name:"Home",link:""},{name:"Tickets",link:"tickets"},{name:"T
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const dispatch = useDispatch()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -43,6 +46,12 @@ function Navbar(props) {
           </ListItem>
 
         ))}
+
+        <ListItem>
+        <ListItemButton  sx={{ textAlign: 'center' }}>
+        <ListItemText primary={"LOGOUT"} />
+        </ListItemButton>
+        </ListItem>
       </List>
     </Box >
   );
@@ -50,8 +59,8 @@ function Navbar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex', background: "red" }}>
-      <AppBar component="nav" style={{ display: 'flex', background: "red", paddingInline: "30px" }}>
+    <Box sx={{ display: 'flex', background: "blue" }}>
+      <AppBar component="nav" style={{ display: 'flex', background: "blue", paddingInline: "50px" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -71,10 +80,14 @@ function Navbar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: '#fff' }}>
+              <Button key={item.name} sx={{ color: '#fff',marginInline:"10px" }}>
               <Link style={{textDecoration:"none",color:"white"}} to={`/${item.link}`}>{item.name}</Link>
               </Button>
             ))}
+
+            <Button  sx={{ color: '#fff' }} onClick={()=>{dispatch(logout())}}>
+         LOGOUT
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

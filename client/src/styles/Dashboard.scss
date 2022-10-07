@@ -5,16 +5,30 @@
     .TicketSection{
         display: flex;
         justify-content: space-around;
+        flex: 1;
 
         .cardMain {
             padding: 20px 20px 5px 20px;
             width: 25%;
-            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            // height: 100px;
+            height: 150px;
             margin: 10px 10px 10px 10px;
             border-radius: 5px;
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
             color: black;
             text-align: center;
+
+            h3{
+                font-size: 20px;
+            }
+
+            h4{
+                font-size: 15px;
+            }
         }
     }
 
