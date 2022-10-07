@@ -12,8 +12,8 @@ const TicketSection = ({tickets}) => {
     <div style={{display:"flex"}}>
 
    <Cricle value={tickets.filter(t=>t.status==="closed").length} maxValue={tickets.length} color="green" text="Closed"/>
-   <Cricle value={tickets.filter(t=>t.status==="open").length} color="yellow" text="Open"/>
-   <Cricle value={tickets.filter(t=>t.status==="unAttended").length} color="red" text="Unattended"/>
+   <Cricle value={tickets.filter(t=>t.status==="open").length} maxValue={tickets.length} color="yellow" text="Open"/>
+   <Cricle value={tickets.filter(t=>t.status==="unAttended").length} maxValue={tickets.length} color="red" text="Unattended"/>
     </div>
     </div>
     
