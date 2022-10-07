@@ -9,6 +9,7 @@ const TicketSchema = new Schema({
     , title : {type:String, required: true }
     , description : {type:String, required: true }
     , comments : {type:Array}
+    , status : {type:String,default:"not completed"}
 
 }, { timestamps: true })
 
