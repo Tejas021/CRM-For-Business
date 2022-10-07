@@ -5,8 +5,7 @@ import {
     Checkbox,
     FormControlLabel,
     InputAdornment,
-    TextField,
-    IconButton
+    TextField
 }
     from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
