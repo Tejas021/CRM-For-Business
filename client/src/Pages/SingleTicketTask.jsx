@@ -39,14 +39,18 @@ export default function SingleTicketTask() {
                 display: 'flex',
                 alignContent: 'center'
             }}>
+
+            
                 <Heading>{location.state.title}</Heading>
+               {user.isAdmin &&<>
                 {
-                    type === 'ticket' ?
-                    task?
-                    <Button onClick={() =>navigate(`/task/${task._id}`,{state:task}) } style={{ height: '30px' }}>go to task</Button>:
-                    <Button onClick={() => setOpen(true)} style={{ height: '30px' }}>Create task</Button>:
-                    ''
-                }
+                   
+                   task?
+                   <Button onClick={() =>navigate(`/task/${task._id}`,{state:task}) } style={{ height: '30px' }}>go to task</Button>:
+                   <Button onClick={() => setOpen(true)} style={{ height: '30px' }}>Create task</Button>
+                   
+               }
+                </>}
             </div>
 
             <KeyValueContainer>
