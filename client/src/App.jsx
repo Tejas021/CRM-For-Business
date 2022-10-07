@@ -10,6 +10,7 @@ import SingleTicketTask from './Pages/SingleTicketTask'
 import Navbar from './components/Navbar'
 import { userRequest } from "./axios";
 import { setUser } from "./redux/reducers/auth";
+import TaskPage from './Pages/TaskPage'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/tickets" element={user ? <TicketPage /> : <Login />} />
           <Route exact path="/tasks" element={user ? <Task /> : <Login />} />
           <Route exact path="/ticket/:id" element={user ? <SingleTicketTask /> : <Login />} />
+          <Route exact path="/task/:id" element={user ? <TaskPage /> : <Login />} />
         </Routes>
       </Router>
     </div>

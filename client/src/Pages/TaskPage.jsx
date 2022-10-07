@@ -6,30 +6,28 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { publicRequest } from "../axios"
 import { useSelector } from 'react-redux'
 import TaskModal from '../components/Tasks/TaskModal';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function SingleTicketTask() {
+export default function TaskPage() {
 
     const location = useLocation()
-    const navigate = useNavigate()
     const [text, setText] = useState('')
     const user = useSelector(state => state.auth.currentUser)
     const [comments, setComments] = useState([])
-    const [open, setOpen] = useState(false);
-    const [task, setTask] = useState(null)
-    const type = location.pathname.split('/')[1]
+    
 
     useEffect(() => {
         setComments(location.state.comments)
     }, [location])
 
+    console.log(location.pathname.split('/'))
 
     const submitComment = () => {
         const data = location.state.comments.length < 1 ? [{ text: text, name: user.username }] : [...location.state.comments, { text: text, name: user.username }]
-        publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { comments: data }).
+        publicRequest.patch(`/task/updateTask/${location.state._id}`, { comments: data }).
             then(r => {setComments(r.data.comments);
-                setText('')
-            }).
+            setTask('')
+        }).
             catch(err => console.log(err))
     }
 
@@ -39,18 +37,7 @@ export default function SingleTicketTask() {
                 display: 'flex',
                 alignContent: 'center'
             }}>
-
-            
                 <Heading>{location.state.title}</Heading>
-               {user.isAdmin &&<>
-                {
-                   
-                   task?
-                   <Button onClick={() =>navigate(`/task/${task._id}`,{state:task}) } style={{ height: '30px' }}>go to task</Button>:
-                   <Button onClick={() => setOpen(true)} style={{ height: '30px' }}>Create task</Button>
-                   
-               }
-                </>}
             </div>
 
             <KeyValueContainer>
@@ -104,7 +91,7 @@ export default function SingleTicketTask() {
                     variant="contained">Submit</Button>
                 <hr />
             </div>
-            <TaskModal location={location} task={task} setTask={setTask} open={open} setOpen={setOpen} />
+            {/* <TaskModal location={location} task={task} setTask={setTask} open={open} setOpen={setOpen} /> */}
 
         </Container>
     )
@@ -143,9 +130,8 @@ const BoldText = styled.p`
 `
 
 const NormalText = styled.p`
-    font-size: 15px;
+    font-size: 14px;
     color: #090030;
-    marginBottom:0
 `
 
 const DescriptionContainer = styled.div`

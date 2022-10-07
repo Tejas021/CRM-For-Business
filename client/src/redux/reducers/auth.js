@@ -12,6 +12,7 @@ const userSlice = createSlice({
         logout:(state,action)=>{
             state.currentUser = null;
             localStorage.setItem('token','')
+            localStorage.setItem('x-auth-token','')
         }
         
     }

@@ -3,14 +3,17 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { publicRequest } from '../../axios';
 import "../../styles/Create.scss"
-const CreateTicket = () => {
 
+const CreateTicket = ({setTickets,tickets}) => {
+
+   
     const user  = useSelector(state=>state.auth.currentUser);
-    const [ticketData, setTicketData] = useState({title:"",description:"",budget:"",time:0,assignedBy:user.email});
+    const [ticketData, setTicketData] = useState({title:"",description:"",budget:"",time:null,assignedBy:user.email});
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        publicRequest.post("/ticket/createTicket",ticketData).then(res=>console.log(res.data)).catch(err=>console.log(err))
+        publicRequest.post("/ticket/createTicket",ticketData).then(res=>setTickets([...tickets,res.data])).catch(err=>console.log(err))
+        setTicketData({title:"",description:"",budget:"",time:0,assignedBy:user.email})
     }
 
   return (

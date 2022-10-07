@@ -3,15 +3,13 @@ const Task = require("../models/task")
 
 router.post('/create-task', async (req, res) => {
 
-    const { title, description, hours } = req.body;
-    const newTask = new Task({
-        title,
-        description,
-        hours
-    })
-    console.log("newTask", newTask);
+    // const { title, description, hours } = req.body;
+    console.log("newTask", req.body);
+    const newTask = new Task(req.body)
+   
     try {
         const savedTask = await newTask.save();
+        // console.log(savedTask)
         return res.json(savedTask);
     } catch (error) {
         return res.json({ "error": error })
@@ -44,7 +42,7 @@ router.patch("/updateTask/:id", async (req, res) => {
 
 router.get("/getAllTask",async(req,res)=>{
     try{
-        const task = await Ticket.find();
+        const task = await Task.find();
         res.status(200).send(task)
     } catch(err){
         res.status(500).json(err)
