@@ -1,3 +1,11 @@
 .dashContainer{
     padding: 50px;
+    margin-top: 50px;
+
+    .TicketSection{
+        display: flex;
+        justify-content: space-around;
+    }
+
 }
+
