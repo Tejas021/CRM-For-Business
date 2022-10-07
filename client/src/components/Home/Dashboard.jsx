@@ -7,6 +7,7 @@ import Table1 from "./Table1";
 import TicketCount from "./TicketCount";
 import TicketSection from "./TicketSection";
 import { publicRequest } from "../../axios";
+import Table2 from "./Table2";
 
 const Dashboard = () => {
 
@@ -42,7 +43,7 @@ useEffect(()=>{
 
 <h1 style={{marginTop:"50px"}}>Clients</h1>
    
-    <Table1/>
+    <Table2 users={users.filter(u=>u.role=="client")}/>
 
 
     <h1>Tasks</h1>
@@ -56,7 +57,7 @@ useEffect(()=>{
 
     <h1>Employees</h1>
 
-    <Table1/>
+    <Table2 users={users.filter(u=>u.role=="employee")}/>
 
   </div>;
 };
