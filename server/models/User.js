@@ -7,6 +7,7 @@ const userShema =new Schema({
     ,email:{required:true,unique:true,type:String}
     ,password:{required:true,type:String}
     ,isAdmin:{required:true,type:Boolean,default:false
+    ,role:{required:true,type:String}
     }
 },{timestamps:true})
 

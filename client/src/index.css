@@ -3,7 +3,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
+/* background-color: #121212; */
   /* color-scheme: light dark; */
   
 
@@ -14,3 +14,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
+*{
+  margin: 0;
+  padding: 0;
+}
