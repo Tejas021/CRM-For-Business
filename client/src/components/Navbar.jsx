@@ -18,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../redux/reducers/auth';
 
 const drawerWidth = 240;
-const navItems = [{name:"Home",link:""},{name:"Tickets",link:"tickets"},{name:"Tasks",link:"tasks"}];
+const navItems = [{ name: "Home", link: "" }, { name: "Tickets", link: "tickets" }, { name: "Tasks", link: "tasks" }];
 
 function Navbar(props) {
   const { window } = props;
@@ -28,6 +28,7 @@ function Navbar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -40,8 +41,8 @@ function Navbar(props) {
 
           <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-            <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
-             
+              <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
+
             </ListItemButton>
           </ListItem>
 

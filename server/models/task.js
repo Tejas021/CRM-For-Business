@@ -5,11 +5,11 @@ const { Schema } = mongoose
 const TaskSchema = new Schema({
     title: { required: true, type: String },
     description: { required: true, type: String },
-    hours: { required: true, type: Number },
-    assignedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    assingedTo: { type: Schema.Types.ObjectId, ref: 'User' },
+    hours: { required: true, type: String },
+    assignedBy: { type: String  },
+    assignedTo: { type: String },
     comments: { type: Array },
-    budget : {type:String},
+    budget : {type:Number,default:0},
     status : {type:String,default:'unAttended'}
 }, { timestamps: true })
 

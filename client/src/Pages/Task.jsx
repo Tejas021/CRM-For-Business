@@ -50,7 +50,6 @@ const Task = () => {
       </div>
 
 
-
       <div className='right'>
         <CreateTask tasks={tasks} setTasks={setTasks} />
       </div>

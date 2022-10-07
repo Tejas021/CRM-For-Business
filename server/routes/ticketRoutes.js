@@ -23,6 +23,8 @@ router.delete("/deleteticket/:id", async (req, res) => {
 })
 
 router.patch("/updateTicket/:id", async (req, res) => {
+    console.log(req.params.id)
+    console.log(req.body)
     try {
         const updatedTicket = await Ticket.findByIdAndUpdate(
             req.params.id,
