@@ -4,6 +4,7 @@ const cors  = require("cors")
 const app = express()
 const mongoose = require("mongoose")
 const authRoutes = require("./routes/authRoutes")
+const ticketRoutes = require("./routes/ticketRoutes")
 require("dotenv").config()
 
 const corsConfig={
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_DB).then(()=>{
     })
 })
 app.use("/api/auth/",authRoutes)
+app.use("/api/ticket/",ticketRoutes)
 
 app.get("/",(req,res)=>{
 console.log("called")

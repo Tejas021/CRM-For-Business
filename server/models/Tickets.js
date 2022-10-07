@@ -5,7 +5,9 @@ const Schema = mongoose.Schema
 const TicketSchema = new Schema({
     assignedBy: { required: true, type: String }
     , budget: { required: true, type: String }
-    , time: { required: true, default: false }
+    , time: { required: true, type: String }
+    , title : {type:String, required: true }
+    , description : {type:String, required: true }
     , comments : {type:Array}
 
 }, { timestamps: true })
