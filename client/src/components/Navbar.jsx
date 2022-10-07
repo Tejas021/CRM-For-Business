@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = [{name:"Home",link:"home"},{name:"Tickets",link:"tickets"},{name:"Tasks",link:"tasks"}];
 
 function Navbar(props) {
   const { window } = props;
@@ -33,9 +33,10 @@ function Navbar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+            
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -67,8 +68,8 @@ function Navbar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+              <Button key={item.name} sx={{ color: '#fff' }}>
+                {item.name}
               </Button>
             ))}
           </Box>

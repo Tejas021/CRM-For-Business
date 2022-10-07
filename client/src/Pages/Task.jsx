@@ -1,9 +1,22 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import CreateTask from '../components/Tasks/CreateTask'
 import TaskCard from '../components/Tasks/TaskCard'
 import "../styles/Task.scss"
+import {useSelector} from 'react-redux'
+import { publicRequest } from '../axios'
 
 const Task = () => {
+
+  const [tasks,setTasks]=useState([])
+  
+  const user = useSelector(user => user.auth.currentUser)
+
+  useEffect(() => {
+    publicRequest.get("/task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
+  }, [user])
+
+  console.log(tasks)
+
   return (
     <div className='taskContainer'>
     <div className='left'>
@@ -23,7 +36,7 @@ const Task = () => {
 
 
     <div className='right'>
-<CreateTask/>
+<CreateTask tasks={tasks} setTasks={setTasks} />
     </div>
     </div>
   )
