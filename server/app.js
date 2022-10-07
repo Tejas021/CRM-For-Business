@@ -7,7 +7,7 @@ require("dotenv").config()
 
 app.use(json())
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.ovttb.mongodb.net/crm?retryWrites=true&w=majority").then(()=>{
+mongoose.connect(process.env.MONGO_DB).then(()=>{
     app.listen(3000,()=>{
         console.log("connected")
     })
