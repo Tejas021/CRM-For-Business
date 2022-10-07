@@ -4,11 +4,13 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Home from './Pages/Home'
 import { useSelector, useDispatch } from 'react-redux'
+import { setUser } from './redux/reducers/auth'
 
 function App() {
 
   const user = useSelector(state => state.auth.currentUser)
   const dispatch = useDispatch();
+// dispatch(setUser(true));
 
   return (
     <div className="App">
