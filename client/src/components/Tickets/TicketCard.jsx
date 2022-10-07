@@ -1,24 +1,29 @@
 import React from 'react'
 import "../../styles/Card.scss"
-const TicketCard = ({data}) => {
+import { useNavigate } from "react-router-dom"
 
-  function getColor(status){
-    if(status==='unAttended'){
+const TicketCard = ({ data }) => {
+
+  const navigate = useNavigate(`/ticket/${data._id}`)
+  function getColor(status) {
+    if (status === 'unAttended') {
       return 'red'
-    }else if(status==='open'){
+    } else if (status === 'open') {
       return 'orange'
-    }else{
+    } else {
       return 'green'
     }
   }
 
   return (
-    <div style={{
-      backgroundColor: getColor(data.status)
-    }} className='cardMain'>
+    <div
+      onClick={() => { console.log('first',data); navigate(`/ticket/1`,{state:data}) }}
+      style={{
+        backgroundColor: getColor(data.status)
+      }} className='cardMain'>
       <h3 className='title'>{data.title}</h3>
       <p style={{
-        marginTop:'5%'
+        marginTop: '5%'
       }}>ETA: {data.time} hours</p>
       <p>budget :- ${data.budget} </p>
     </div>

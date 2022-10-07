@@ -1,23 +1,27 @@
 import React from 'react';
 import styled from 'styled-components'
+import { useLocation } from 'react-router-dom';
 
 export default function SingleTicketTask() {
+
+    const location = useLocation()
+
+   console.log(location)
+
     return (
         <Container>
-            <Heading>Heading</Heading>
+            <Heading>{location.state.title}</Heading>
             <KeyValueContainer>
                 <BoldText>Assigned By:</BoldText>
-                <NormalText>Akshay</NormalText>
+                <NormalText>{location.state.assignedBy}</NormalText>
             </KeyValueContainer>
-            <KeyValueContainer>
+            {location.state.assignedTo && <KeyValueContainer>
                 <BoldText>Assigned To:</BoldText>
                 <NormalText>Akshay</NormalText>
-            </KeyValueContainer>
+            </KeyValueContainer>}
             <DescriptionContainer>
                 <BoldText>Description:</BoldText>
-                <NormalText>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Eum voluptatibus, odit laboriosam vitae et enim officiis optio unde error commodi,
-                    fuga repudiandae praesentium reiciendis accusantium harum tempore eligendi nihil? Esse!
+                <NormalText>{location.state.description}
                 </NormalText>
             </DescriptionContainer>
         </Container>

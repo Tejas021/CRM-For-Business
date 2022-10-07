@@ -13,10 +13,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = [{ name: "Home", link: "home" }, { name: "Tickets", link: "tickets" }, { name: "Tasks", link: "tasks" }];
+const navItems = [{name:"Home",link:""},{name:"Tickets",link:"tickets"},{name:"Tasks",link:"tasks"}];
 
 function Navbar(props) {
   const { window } = props;
@@ -36,13 +36,10 @@ function Navbar(props) {
         {navItems.map((item) => (
 
           <ListItem key={item.name} disablePadding>
-            <Link to={`/${item.link}`}>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-
-                <ListItemText primary={item.name} />
-
-              </ListItemButton>
-            </Link>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+            <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
+             
+            </ListItemButton>
           </ListItem>
 
         ))}
@@ -75,7 +72,7 @@ function Navbar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item.name} sx={{ color: '#fff' }}>
-                {item.name}
+              <Link style={{textDecoration:"none",color:"white"}} to={`/${item.link}`}>{item.name}</Link>
               </Button>
             ))}
           </Box>

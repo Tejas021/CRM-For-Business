@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { publicRequest } from '../../axios';
 import "../../styles/Create.scss"
+
 const CreateTicket = ({setTickets,tickets}) => {
 
+   
     const user  = useSelector(state=>state.auth.currentUser);
     const [ticketData, setTicketData] = useState({title:"",description:"",budget:"",time:null,assignedBy:user.email});
 
