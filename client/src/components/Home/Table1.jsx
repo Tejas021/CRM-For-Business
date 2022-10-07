@@ -119,7 +119,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead style={{marginTop:"50px"}}>
+    <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox

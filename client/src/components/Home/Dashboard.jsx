@@ -48,9 +48,9 @@ useEffect(()=>{
     <h1>Tasks</h1>
 
     <div className="TicketSection">
-      <TicketCount bgColor="#ff4444" text="Unattended" count={23} />
-      <TicketCount bgColor="#00C851" text="Closed" count={23} />
-      <TicketCount bgColor="#ffbb33" text="Open" count={23} />
+      <TicketCount bgColor="#ff4444" text="Unattended" count={tasks.filter(t=>t.status==="unAttended").length} />
+      <TicketCount bgColor="#00C851" text="Closed" count={tasks.filter(t=>t.status==="close").length} />
+      <TicketCount bgColor="#ffbb33" text="Open" count={tasks.filter(t=>t.status==="open").length} />
     </div>
 
 

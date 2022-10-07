@@ -1,10 +1,10 @@
 import React from 'react'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-const Cricle = ({value,color,text}) => {
+const Cricle = ({value,color,text,maxValue}) => {
   return (
     <div     style={{margin:"20px"}}>
-    <CircularProgressbar value={value} maxValue={100} text={value}
+    <CircularProgressbar value={value} maxValue={maxValue} text={value}
     styles={buildStyles({
 
         pathTransitionDuration: 0.5,
