@@ -40,7 +40,7 @@ const Login = () => {
             // console.log(res.data)
             dispatch(setUser(res.data))
             if (checked) {
-                localStorage.setItem("token", res.data.accessToken)
+                localStorage.setItem("x-auth-token", res.data.accessToken)
             }
             setError('')
             navigate("/");

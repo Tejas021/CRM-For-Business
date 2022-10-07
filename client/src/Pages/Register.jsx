@@ -38,15 +38,16 @@ const Register = () => {
         e.preventDefault();
         try {
             const res = await publicRequest.post('/auth/register', { username,email, password })
-            // console.log(res.data)
+            console.log(res.data)
             dispatch(setUser(res.data))
             if (checked) {
-                localStorage.setItem("token", res.data.accessToken)
+                localStorage.setItem("x-auth-token", res.data.accessToken)
             }
             setError('')
             navigate("/");
         } catch (err) {
-            setError(err.response.data)
+            // setError(err.response.data)
+            console.log(err)
         }
     }
 
