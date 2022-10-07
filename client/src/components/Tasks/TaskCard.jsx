@@ -29,7 +29,7 @@ const TaskCard = ({ data }) => {
         marginTop: '5%'
       }}>ETA: {data.hours} hours</p>
       <p>budget :- ${data.budget} </p>
-      <p>Assigned To :- ${data.assignedTo} </p>
+      <p>Assigned To :- {data.assignedTo} </p>
 
     </div>
   )

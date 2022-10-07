@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 const TicketCard = ({ data }) => {
 
-  const navigate = useNavigate(`/ticket/${data._id}`)
+  const navigate = useNavigate()
   function getColor(status) {
     if (status === 'unAttended') {
       return 'red'
@@ -17,15 +17,15 @@ const TicketCard = ({ data }) => {
 
   return (
     <div
-      onClick={() => { console.log('first',data); navigate(`/ticket/1`,{state:data}) }}
+      onClick={() => { console.log('first',data); navigate(`/ticket/${data?._id}`,{state:data}) }}
       style={{
-        backgroundColor: getColor(data.status)
+        backgroundColor: getColor(data?.status)
       }} className='cardMain'>
-      <h3 className='title'>{data.title}</h3>
+      <h3 className='title'>{data?.title}</h3>
       <p style={{
         marginTop: '5%'
-      }}>ETA: {data.time} hours</p>
-      <p>budget :- ${data.budget} </p>
+      }}>ETA: {data?.time} hours</p>
+      <p>budget :- ${data?.budget} </p>
     </div>
   )
 }

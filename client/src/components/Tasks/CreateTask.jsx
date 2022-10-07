@@ -4,11 +4,12 @@ import { publicRequest } from '../../axios';
 import { useSelector } from 'react-redux';
 
 const CreateTask = ({setTasks,tasks}) => {
-  const [taskData, setTaskData] = useState({ title: "", description: "", budget: "",hours:'',assignedTo:'' });
-  const user = useSelector(state=>state.auth.user)
+  const user = useSelector(state=>state.auth.currentUser)
+  const [taskData, setTaskData] = useState({ title: "", description: "", budget: "",hours:'',assignedTo:'',assignedBy:user.email });
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log('task',taskData)
     publicRequest.post("/task/create-task",taskData).then(res=>{
       setTasks([...tasks,res.data]);
       setTaskData({ title: "", description: "", budget: "",hours:'',assignedTo:'',assignedBy:user.email })

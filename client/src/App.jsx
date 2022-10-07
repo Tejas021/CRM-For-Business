@@ -42,6 +42,7 @@ function App() {
           <Route exact path="/tickets" element={user ? <TicketPage /> : <Login />} />
           <Route exact path="/tasks" element={user ? <Task /> : <Login />} />
           <Route exact path="/ticket/:id" element={user ? <SingleTicketTask /> : <Login />} />
+          <Route exact path="/task/:id" element={user ? <SingleTicketTask /> : <Login />} />
         </Routes>
       </Router>
     </div>

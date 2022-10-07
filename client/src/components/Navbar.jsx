@@ -14,9 +14,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/reducers/auth';
 
 const drawerWidth = 240;
-const navItems = [{name:"Home",link:""},{name:"Tickets",link:"tickets"},{name:"Tasks",link:"tasks"}];
+const navItems = [{ name: "Home", link: "" }, { name: "Tickets", link: "tickets" }, { name: "Tasks", link: "tasks" }];
 
 function Navbar(props) {
   const { window } = props;
@@ -25,6 +28,7 @@ function Navbar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const dispatch = useDispatch()
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -37,12 +41,17 @@ function Navbar(props) {
 
           <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-            <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
-             
+              <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
+
             </ListItemButton>
           </ListItem>
 
         ))}
+        <ListItem disablePadding>
+          <ListItemButton sx={{ color:'white' }}>
+            <LogoutIcon onClick={()=>dispatch(logout())} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box >
   );
@@ -72,9 +81,12 @@ function Navbar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item.name} sx={{ color: '#fff' }}>
-              <Link style={{textDecoration:"none",color:"white"}} to={`/${item.link}`}>{item.name}</Link>
+                <Link style={{ textDecoration: "none", color: "white" }} to={`/${item.link}`}>{item.name}</Link>
               </Button>
             ))}
+            <Button onClick={()=>dispatch(logout())} sx={{ color: '#fff' }}>
+              <LogoutIcon />
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
