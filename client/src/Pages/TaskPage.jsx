@@ -25,7 +25,9 @@ export default function TaskPage() {
     const submitComment = () => {
         const data = location.state.comments.length < 1 ? [{ text: text, name: user.username }] : [...location.state.comments, { text: text, name: user.username }]
         publicRequest.patch(`/task/updateTask/${location.state._id}`, { comments: data }).
-            then(r => setComments(r.data.comments)).
+            then(r => {setComments(r.data.comments);
+            setTask('')
+        }).
             catch(err => console.log(err))
     }
 

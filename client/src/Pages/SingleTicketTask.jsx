@@ -27,7 +27,9 @@ export default function SingleTicketTask() {
     const submitComment = () => {
         const data = location.state.comments.length < 1 ? [{ text: text, name: user.username }] : [...location.state.comments, { text: text, name: user.username }]
         publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { comments: data }).
-            then(r => setComments(r.data.comments)).
+            then(r => {setComments(r.data.comments);
+                setText('')
+            }).
             catch(err => console.log(err))
     }
 
