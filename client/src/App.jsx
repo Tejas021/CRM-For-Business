@@ -13,7 +13,7 @@ function App() {
 
   const user = useSelector(state => state.auth.currentUser)
   const dispatch = useDispatch();
-dispatch(setUser(true));
+// dispatch(setUser(true));
 
   return (
     <div className="App">

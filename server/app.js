@@ -9,7 +9,7 @@ const ticketRoutes = require("./routes/ticketRoutes")
 require("dotenv").config()
 
 const corsConfig = {
-    origin: "http://127.0.0.1:5173",
+    origin: "*",
     credentials: true,
     optionsSuccessStatus: 200
 }
