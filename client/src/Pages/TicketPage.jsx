@@ -33,7 +33,7 @@ const TicketPage = () => {
         <div className='tickets'>
           {
             tickets.filter(t=>t.status==='open').length > 0 ?
-            tickets.filter(t=>t.status==='open').map(t => <TicketCard />):
+            tickets.filter(t=>t.status==='open').map(t => <TicketCard data={t} />):
             <p style={{textAlign:'center'}}>No tcikets</p>
           }
         </div>
@@ -42,7 +42,7 @@ const TicketPage = () => {
         <div className='tickets'>
           {
             tickets.filter(t=>t.status==='closed').length > 0 ?
-            tickets.filter(t=>t.status==='closed').map(t => <TicketCard />):
+            tickets.filter(t=>t.status==='closed').map(t => <TicketCard data={t} />):
             <p style={{textAlign:'center',color:'black'}}>No tcikets</p>
           }
         </div>

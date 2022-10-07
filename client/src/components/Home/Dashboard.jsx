@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import TicketPage from "../../Pages/TicketPage";
 import "../../styles/Dashboard.scss";
 import TicketCard from "../Tickets/TicketCard";
@@ -6,13 +6,35 @@ import Graph from "./Graph";
 import Table1 from "./Table1";
 import TicketCount from "./TicketCount";
 import TicketSection from "./TicketSection";
+import { publicRequest } from "../../axios";
+
 const Dashboard = () => {
+
+
+  
+  const [tasks, setTasks] = useState([]);
+  const [tickets, setTickets] = useState([]);
+  const [users,setUsers] = useState([])
+
+
+useEffect(()=>{
+
+
+  publicRequest.get("/user/getAllUsers").then(res=>res.data).then(res=>setUsers(res))
+  publicRequest.get("/ticket/getAllTickets").then(res=>res.data).then(res=>setTickets(res))
+  publicRequest.get("/task/getAllTask").then(res=>res.data).then(res=>setTasks(res))
+
+},[])
+
+
+
+
   return <div className="dashContainer">
 <div className="first" style={{display:"flex"}}>
 <Graph/>
 <div className="TicketSection">
 
-     <TicketSection/>
+     <TicketSection tickets={tickets}/>
     </div>
 </div>
 

@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const authRoutes = require("./routes/authRoutes")
 const taskRoutes = require('./routes/task')
 const ticketRoutes = require("./routes/ticketRoutes")
+const userRoutes = require("./routes/userRoutes")
 require("dotenv").config()
 
 const corsConfig = {
@@ -27,6 +28,7 @@ mongoose.connect(process.env.MONGO_DB).then(() => {
 app.use("/api/auth/", authRoutes);
 app.use('/api/task/', taskRoutes);
 app.use("/api/ticket/", ticketRoutes)
+app.use("/api/user/",userRoutes)
 
 app.get("/", (req, res) => {
     console.log("called")
