@@ -4,13 +4,28 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Home from './Pages/Home'
 import { useSelector, useDispatch } from 'react-redux'
-import { setUser } from './redux/reducers/auth'
+import { useEffect } from "react";
+import { userRequest } from "./axios";
+import { setUser } from "./redux/reducers/auth";
 
 function App() {
 
   const user = useSelector(state => state.auth.currentUser)
   const dispatch = useDispatch();
-// dispatch(setUser(true));
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      // console.log("run")
+      try {
+        const res = await userRequest.get('/auth/verify')
+        console.log(res.data)
+        dispatch(setUser(res.data))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    verifyUser();
+  }, [dispatch])
 
   return (
     <div className="App">

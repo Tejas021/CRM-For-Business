@@ -1,37 +1,51 @@
 const jwt = require("jsonwebtoken")
 
 const verifyToken= async(req,res,next)=>{
-    const token=req.cookies.token
-  
+    const authHeader = req.headers.token
 
-    const token1 = req.header("x-auth-token")
+    if (authHeader) {
+        const token = authHeader.split(" ")[1];
+        console.log(token)
+        if(token === "" || token === undefined){
+          console.log("no token")
+        } else{
+          jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
+            if (err) res.status(403).json("Token is not valid!");
+            req.user = user;
+            console.log(req.user)
+            next();
+          });
+        }
+        
+      } else {
+        return res.status(401).json("You are not authenticated!");
+      }
 
-    
-    
-    try{
+//     const token1 = req.header("x-auth-token")    
+//     try{
       
-        if( token1){
+//         if( token1){
             
 
 
 
-            jwt.verify(token1.split(" ")[1],process.env.SECRET_KEY,(err,user)=>{
-                if(err)res.status(404).json("not Authorized")
-                else{
-                    req.user=user
-                    next()
-                }
-            })
-        }
-        else{
+//             jwt.verify(token1.split(" ")[1],process.env.SECRET_KEY,(err,user)=>{
+//                 if(err)res.status(404).json("not Authorized")
+//                 else{
+//                     req.user=user
+//                     next()
+//                 }
+//             })
+//         }
+//         else{
            
-            res.status(401).json("not Authenticated")
-        }
-    }
-    catch(err){
-        console.log(err)
-        res.status(400).json(err)
-    }
+//             res.status(401).json("not Authenticated")
+//         }
+//     }
+//     catch(err){
+//         console.log(err)
+//         res.status(400).json(err)
+//     }
    
 
 }

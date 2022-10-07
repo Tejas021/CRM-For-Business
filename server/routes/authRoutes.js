@@ -42,13 +42,13 @@ router.post("/login",async(req,res)=>{
 
 
     try{
-        const user = await User.findOne({username:req.body.username})
+        const user = await User.findOne({email:req.body.email})
 
-    if(!user){res.status(400).json("Wrong User Name")}
+    if(!user){res.status(400).json("Wrong Email or password")}
 else{
     const hashedPassword  = Cryptojs.AES.decrypt(user.password,process.env.PASS_KEY).toString(Cryptojs.enc.Utf8)
 
-    if(hashedPassword!==req.body.password) {res.status(400).json("Wrong Password")
+    if(hashedPassword!==req.body.password) {res.status(400).json("Wrong Email Or Password")
    }
       
        else{
