@@ -1,0 +1,32 @@
+.createContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    
+    margin: auto;
+    background-color: beige;
+    color: #121212;
+    border-radius: 5px;
+
+    input{
+        outline:0px;
+        border:0px;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        background: fff;
+        color:white
+    }
+
+    button{
+        outline:0px;
+        border:0px;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        background: rgb(55, 187, 55);
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

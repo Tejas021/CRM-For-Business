@@ -22,7 +22,8 @@ router.post("/register",async(req,res)=>{
     
         const {password,...others}= savedUser._doc;
         const accessToken = jwt.sign({id:savedUser._id,
-            isAdmin:savedUser.isAdmin
+            isAdmin:savedUser.isAdmin,
+            role:savedUser.role
             },process.env.SECRET_KEY,{expiresIn:"3d"})
 
         res.cookie("token",accessToken,{maxAge:5*24*60*60*1000,httpOnly:true})
@@ -53,7 +54,8 @@ else{
       
        else{
        const accessToken = jwt.sign({id:user._id,
-       isAdmin:user.isAdmin
+       isAdmin:user.isAdmin,
+       role:user.role
        },process.env.SECRET_KEY,{expiresIn:"3d"})
    
        const {password,...others} = user._doc;
