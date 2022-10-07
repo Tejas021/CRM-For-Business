@@ -87,5 +87,20 @@ router.get("/logout",async(req,res)=>{
     res.send("logout done")
 })
 
+router.post('/search', async(req,res)=>{
+    //    console.log(req.body)
+    
+        try{
+            User.find({ username: { $regex: req.body.search, $options: "i" } }, function(err, docs) {
+                res.status(200).send(docs)
+            });
+        } catch(err){
+            res.status(500).send(err)
+        }
+    
+        
+        
+})
+
 
 module.exports=router
