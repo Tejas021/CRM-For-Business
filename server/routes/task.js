@@ -44,7 +44,7 @@ router.patch("/updateTask/:id", async (req, res) => {
 
 router.get("/getAllTask",async(req,res)=>{
     try{
-        const task = await Ticket.find();
+        const task = await Task.find();
         res.status(200).send(task)
     } catch(err){
         res.status(500).json(err)

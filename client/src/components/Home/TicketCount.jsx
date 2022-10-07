@@ -4,7 +4,7 @@ import React from 'react'
 const TicketCount = ({bgColor,text,count}) => {
   return (
     <div className='cardMain' style={{backgroundColor: `${bgColor}`}}>
-      <h2>{text} tickets</h2>
+      <h3>{text} tickets</h3>
       <h4>count {count}</h4>
     </div>
   )

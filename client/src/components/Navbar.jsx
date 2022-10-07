@@ -34,22 +34,24 @@ function Navbar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
+
           <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
             <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
              
             </ListItemButton>
           </ListItem>
+
         ))}
       </List>
-    </Box>
+    </Box >
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex',background:"red" }}>
-      <AppBar component="nav" style={{ display: 'flex',background:"red" ,paddingInline:"30px"}}>
+    <Box sx={{ display: 'flex', background: "red" }}>
+      <AppBar component="nav" style={{ display: 'flex', background: "red", paddingInline: "30px" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -93,7 +95,7 @@ function Navbar(props) {
           {drawer}
         </Drawer>
       </Box>
-      
+
     </Box>
   );
 }

@@ -8,8 +8,9 @@ const TaskSchema = new Schema({
     hours: { required: true, type: Number },
     assignedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     assingedTo: { type: Schema.Types.ObjectId, ref: 'User' },
-    comments: { type: Array }
-
+    comments: { type: Array },
+    budget : {type:String},
+    status : {type:String,default:'unAttended'}
 }, { timestamps: true })
 
 const Task = mongoose.model("Tasks", TaskSchema)
