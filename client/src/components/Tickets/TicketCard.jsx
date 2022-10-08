@@ -1,6 +1,7 @@
 import React from 'react'
 import "../../styles/Card.scss"
 import { useNavigate } from "react-router-dom"
+import { publicRequest } from '../../axios'
 
 const TicketCard = ({ data }) => {
 
@@ -17,7 +18,16 @@ const TicketCard = ({ data }) => {
 
   return (
     <div
-      onClick={() => { console.log('first',data); navigate(`/ticket/${data?._id}`,{state:data}) }}
+      onClick={() => {
+        if (data.status !== 'closed') {
+          publicRequest.patch(`/ticket/updateTicket/${data._id}`, { status: 'open' }).then(r => {
+            console.log(r.data);
+            navigate(`/ticket/${r.data?._id}`, { state: r.data });
+          })
+        }else{
+          navigate(`/ticket/${data?._id}`, { state: data });
+        }
+      }}
       style={{
         backgroundColor: getColor(data?.status)
       }} className='cardMain'>

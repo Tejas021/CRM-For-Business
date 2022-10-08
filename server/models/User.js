@@ -11,7 +11,5 @@ const userShema =new Schema({
     ,credit:{type:Number,default:3000}
 
 },{timestamps:true})
-
-const User = mongoose.model("User",userShema)
-
-module.exports=User;
+const User = mongoose.model("User", userShema)
+module.exports = User;

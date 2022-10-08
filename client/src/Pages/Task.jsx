@@ -13,7 +13,7 @@ const Task = () => {
 
   useEffect(() => {
     publicRequest.get("/task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
-  }, [user])
+  }, [])
 
   console.log(tasks)
 

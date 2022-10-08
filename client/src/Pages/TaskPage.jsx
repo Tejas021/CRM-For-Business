@@ -4,7 +4,8 @@ import { useLocation } from 'react-router-dom';
 import { TextField, Button } from "@mui/material"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { publicRequest } from "../axios"
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import TaskModal from '../components/Tasks/TaskModal';
 import { Link } from 'react-router-dom';
 
@@ -14,21 +15,31 @@ export default function TaskPage() {
     const [text, setText] = useState('')
     const user = useSelector(state => state.auth.currentUser)
     const [comments, setComments] = useState([])
-    
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         setComments(location.state.comments)
     }, [location])
 
-    console.log(location.pathname.split('/'))
+    console.log(user, "user")
 
     const submitComment = () => {
         const data = location.state.comments.length < 1 ? [{ text: text, name: user.username }] : [...location.state.comments, { text: text, name: user.username }]
         publicRequest.patch(`/task/updateTask/${location.state._id}`, { comments: data }).
-            then(r => {setComments(r.data.comments);
-            setTask('')
-        }).
+            then(r => {
+                setComments(r.data.comments);
+                setTask('')
+            }).
             catch(err => console.log(err))
+    }
+
+    const closeTask = () => {
+        publicRequest.patch(`/task/updateTask/${location.state._id}`, { status: 'close' }).then(r => {
+            console.log(r.data);
+            navigate(`/tasks`);
+        })
+
     }
 
     return (
@@ -38,6 +49,23 @@ export default function TaskPage() {
                 alignContent: 'center'
             }}>
                 <Heading>{location.state.title}</Heading>
+                {
+                    user.isAdmin &&
+                        user.email === location.state.assignedBy &&
+                        location.state.status !== 'close' ?
+                        <Button
+                            style={{
+                                margin: '10px 0 10px auto',
+                                color: 'red',
+                                height: 'max-content'
+                            }}
+                            onClick={closeTask}
+                            variant="outlined"
+                        >
+                            Close Task
+                        </Button> :
+                        null
+                }
             </div>
 
             <KeyValueContainer>
