@@ -13,11 +13,19 @@ const Task = () => {
   const user = useSelector(user => user.auth.currentUser)
 
   useEffect(() => {
-    publicRequest.get("/task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
+
+
+    if(user.isAdmin){
+      publicRequest.get("task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
+    }else{
+      publicRequest.post("task/getTaskUser",{username:user.username}).then(r => setTasks(r.data)).catch(err => console.log(err))
+
+    }
+
+   
   }, [user])
 
-  console.log(tasks)
-  console.log("hello",user,user.isAdmin || user.role==="employee")
+
 
   return (
 <>

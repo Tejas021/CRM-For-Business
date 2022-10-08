@@ -11,7 +11,13 @@ const TicketPage = () => {
   const user = useSelector(user => user.auth.currentUser)
 
   useEffect(() => {
-    publicRequest.get("/ticket/getAllTickets").then(r => setTickets(r.data)).catch(err => console.log(err))
+
+    if(user.isAdmin){
+      publicRequest.get("/ticket/getAllTickets").then(r => setTickets(r.data)).catch(err => console.log(err))
+    }else{
+      publicRequest.post("/ticket//getUserTickets",{email:user.email}).then(r => setTickets(r.data)).catch(err => console.log(err))
+    }
+
   }, [user])
 
   console.log(tickets);
