@@ -40,7 +40,7 @@ export default function TaskPage() {
             console.log(r.data);
             navigate(`/tasks`);
         })
-
+       
     }
 
     return (

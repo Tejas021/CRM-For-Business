@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const Task = require("../models/task")
-const user = require("../models/User")
+const User = require("../models/User")
 const {taskMail} = require("../mail")
 router.post('/create-task', async (req, res) => {
 
@@ -39,6 +39,9 @@ router.patch("/updateTask/:id", async (req, res) => {
             req.body,
             { new: true }
         );
+    
+        const u = await User.findOneAndUpdate({email:updatedTask.assignedTo},{ $inc : { "credit" : 600 } },)
+        console.log(u);
         res.status(200).send(updatedTask);
     } catch (err) {
         res.status(500).json(err)
