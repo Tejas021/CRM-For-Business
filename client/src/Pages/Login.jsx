@@ -38,14 +38,14 @@ const Login = () => {
         try {
             const res = await publicRequest.post('/auth/login', { email, password })
             // console.log(res.data)
-            dispatch(setUser(res.data))
-            if (checked) {
-                localStorage.setItem("x-auth-token", res.data.accessToken)
-            }
+            res && res?.data && dispatch(setUser(res?.data))
+            // if (checked) {
+            //     localStorage.setItem("x-auth-token", res?.data?.accessToken)
+            // }
             setError('')
             navigate("/");
         } catch (err) {
-            setError(err.response.data)
+            setError(err?.response?.data)
         }
     }
 
