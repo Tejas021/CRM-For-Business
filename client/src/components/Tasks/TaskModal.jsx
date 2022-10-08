@@ -14,6 +14,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    
 };
 const TaskModal = ({ open, setOpen, location, task , setTask }) => {
 
@@ -54,12 +55,15 @@ const TaskModal = ({ open, setOpen, location, task , setTask }) => {
                     onChange={(e) => setSearch(e.target.value)}
                     style={{ width: '100%', height: '40px', marginBottom: '15px' }} id="filled-basic" placeholder="Assign To" variant="filled" />
 
-                <div>
+                <div style={{
+                    maxHeight:'400px',
+                    overflowY:'scroll'
+                }}>
                     {
                         res.map(user => {
                             return <>
                                 <div 
-                                onClick={()=>createTask(user.username)}
+                                onClick={()=>createTask(user.email)}
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -67,7 +71,7 @@ const TaskModal = ({ open, setOpen, location, task , setTask }) => {
                                     padding: '5px',
                                     cursor: 'pointer'
                                 }}>
-                                    {user.username}
+                                    {user.email}
                                 </div>
                                 <hr />
                             </>

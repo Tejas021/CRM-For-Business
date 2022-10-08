@@ -4,6 +4,7 @@ import TaskCard from '../components/Tasks/TaskCard'
 import "../styles/Task.scss"
 import { useSelector } from 'react-redux'
 import { publicRequest } from '../axios'
+import TicketPage from './TicketPage'
 
 const Task = () => {
 
@@ -12,13 +13,25 @@ const Task = () => {
   const user = useSelector(user => user.auth.currentUser)
 
   useEffect(() => {
-    publicRequest.get("/task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
-  }, [])
 
-  console.log(tasks)
+
+    if(user.isAdmin){
+      publicRequest.get("task/getAllTask").then(r => setTasks(r.data)).catch(err => console.log(err))
+    }else{
+      publicRequest.post("task/getTaskUser",{username:user.username}).then(r => setTasks(r.data)).catch(err => console.log(err))
+
+    }
+
+   
+  }, [user])
+
+
 
   return (
-    <div className='taskContainer'>
+<>
+
+
+{(user.isAdmin || user.role==="employee")?(<div className='taskContainer'>
       <div className='left'>
 
 
@@ -50,10 +63,15 @@ const Task = () => {
       </div>
 
 
-      <div className='right'>
+      {user.isAdmin? <div className='right'>
         <CreateTask tasks={tasks} setTasks={setTasks} />
-      </div>
-    </div>
+      </div>:<></>}
+     
+    </div>):<TicketPage/>}
+
+</>
+    
+    
   )
 }
 

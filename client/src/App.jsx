@@ -36,7 +36,6 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-
           <Route path="/register" element={user ? <Home /> : <Register />} />
           <Route path="/login" element={user ? <Home /> : <Login />} />
           <Route exact path="/" element={user ? <Home /> : <Login />} />

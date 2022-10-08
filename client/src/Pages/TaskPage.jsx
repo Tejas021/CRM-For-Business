@@ -35,7 +35,8 @@ export default function TaskPage() {
     }
 
     const closeTask = () => {
-        publicRequest.patch(`/task/updateTask/${location.state._id}`, { status: 'close' }).then(r => {
+        let status = location.state.status === 'close' ? 'open' : 'close';
+        publicRequest.patch(`/task/updateTask/${location.state._id}`, { status: status }).then(r => {
             console.log(r.data);
             navigate(`/tasks`);
         })
@@ -51,18 +52,17 @@ export default function TaskPage() {
                 <Heading>{location.state.title}</Heading>
                 {
                     user.isAdmin &&
-                        user.email === location.state.assignedBy &&
-                        location.state.status !== 'close' ?
+                        user.email === location.state.assignedBy ?
                         <Button
                             style={{
                                 margin: '10px 0 10px auto',
-                                color: 'red',
+                                color: location.state.status !== 'close' ? 'red' : 'green',
                                 height: 'max-content'
                             }}
                             onClick={closeTask}
                             variant="outlined"
                         >
-                            Close Task
+                            {location.state.status !== 'close' ? 'Close Task' : 'Open Task'}
                         </Button> :
                         null
                 }
