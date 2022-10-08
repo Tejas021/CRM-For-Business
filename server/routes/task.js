@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const Task = require("../models/task")
-
+const user = require("../models/User")
+const {taskMail} = require("../mail")
 router.post('/create-task', async (req, res) => {
 
     // const { title, description, hours } = req.body;
@@ -9,7 +10,11 @@ router.post('/create-task', async (req, res) => {
    
     try {
         const savedTask = await newTask.save();
+
         // console.log(savedTask)
+        // const user = await user.find({username:savedTask.assignedTo})
+        // console.log(user);
+        taskMail(savedTask);
         return res.json(savedTask);
     } catch (error) {
         return res.json({ "error": error })
