@@ -23,11 +23,14 @@ const TaskCard = ({ data }) => {
         backgroundColor: getColor(data.status)
       }}
       onClick={() => {
-        console.log('first'); 
-        publicRequest.patch(`/task/updateTask/${data._id}`,{status:'open'}).then(r=>{
-          console.log(r.data);
-          navigate(`/task/${data._id}`,{state:data})
-        })
+        if (data.status !== 'close') {
+          publicRequest.patch(`/task/updateTask/${data?._id}`, { status: 'open' }).then(r => {
+            console.log(r.data);
+            navigate(`/task/${data._id}`, { state: data })
+          })
+        } else {
+          navigate(`/task/${data?._id}`, { state: data });
+        }
       }}
       className='cardMain'
     >
