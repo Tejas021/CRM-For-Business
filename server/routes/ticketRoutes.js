@@ -1,3 +1,4 @@
+const {email} = require("../mail");
 const router = require("express").Router()
 const Ticket = require('../models/Tickets')
 
@@ -5,6 +6,7 @@ router.post('/createTicket', async (req, res) => {
     const newTicket = new Ticket(req.body);
     try {
         const savedTicket = await newTicket.save();
+        email(savedTicket);
         res.status(200).send(savedTicket)
     } catch (err) {
         res.status(500).send(err);

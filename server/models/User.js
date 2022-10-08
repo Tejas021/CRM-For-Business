@@ -6,10 +6,10 @@ const userShema =new Schema({
     username:{required:true,unique:true,type:String}
     ,email:{required:true,unique:true,type:String}
     ,password:{required:true,type:String}
-    ,isAdmin:{required:true,type:Boolean,default:false
+    ,isAdmin:{required:true,type:Boolean,default:false}  
+    ,role:{required:true,type:String,default:"client"}
+    ,credit:{type:Number,default:3000}
 
-  
-    }  ,role:{required:true,type:String,default:"client"}
 },{timestamps:true})
 
 const User = mongoose.model("User",userShema)

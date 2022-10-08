@@ -32,7 +32,7 @@ useEffect(()=>{
 
   return <div className="dashContainer">
 <div className="first" style={{display:"flex"}}>
-<Graph/>
+<Graph users={users}/>
 <div className="TicketSection">
 
      <TicketSection tickets={tickets}/>
