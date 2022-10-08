@@ -1,6 +1,7 @@
 import React from 'react'
 import "../../styles/Card.scss"
 import { useNavigate } from "react-router-dom"
+import { publicRequest } from '../../axios'
 
 const TaskCard = ({ data }) => {
 
@@ -21,7 +22,13 @@ const TaskCard = ({ data }) => {
       style={{
         backgroundColor: getColor(data.status)
       }}
-      onClick={() => {console.log('first'); navigate(`/task/${data._id}`,{state:data})}}
+      onClick={() => {
+        console.log('first'); 
+        publicRequest.patch(`/task/updateTask/${data._id}`,{status:'open'}).then(r=>{
+          console.log(r.data);
+          navigate(`/task/${data._id}`,{state:data})
+        })
+      }}
       className='cardMain'
     >
       <h3 className='title'>{data.title}</h3>
