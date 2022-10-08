@@ -36,7 +36,8 @@ export default function SingleTicketTask() {
 
     const closeTicket = () => {
         console.log("state", location.state);
-        publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { status: 'closed' }).then(r => {
+        let status = location.state.status === 'closed' ? 'open' : 'closed';
+        publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { status: status }).then(r => {
             console.log(r.data);
             navigate(`/tickets`);
         })
@@ -63,18 +64,17 @@ export default function SingleTicketTask() {
                 </>}
                 {
                     user.role === 'client' &&
-                        user.email === location.state.assignedBy &&
-                        location.state.status !== 'closed' ?
+                        user.email === location.state.assignedBy ?
                         <Button
                             style={{
                                 margin: '10px 0 10px auto',
-                                color: 'red',
+                                color: location.state.status !== 'closed' ? 'red' : 'green',
                                 height: 'max-content'
                             }}
                             onClick={closeTicket}
                             variant="outlined"
                         >
-                            Close Ticket
+                            {location.state.status !== 'closed' ? 'Close Ticket' : 'Open Ticket'}
                         </Button> :
                         null
                 }
