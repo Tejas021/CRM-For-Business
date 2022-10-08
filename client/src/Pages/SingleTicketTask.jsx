@@ -145,7 +145,7 @@ const BoldText = styled.p`
 const NormalText = styled.p`
     font-size: 15px;
     color: #090030;
-    marginBottom:0
+    margin-bottom:0
 `
 
 const DescriptionContainer = styled.div`

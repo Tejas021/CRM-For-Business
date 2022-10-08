@@ -4,6 +4,7 @@ import TaskCard from '../components/Tasks/TaskCard'
 import "../styles/Task.scss"
 import { useSelector } from 'react-redux'
 import { publicRequest } from '../axios'
+import TicketPage from './TicketPage'
 
 const Task = () => {
 
@@ -16,9 +17,13 @@ const Task = () => {
   }, [user])
 
   console.log(tasks)
+  console.log("hello",user,user.isAdmin || user.role==="employee")
 
   return (
-    <div className='taskContainer'>
+<>
+
+
+{(user.isAdmin || user.role==="employee")?(<div className='taskContainer'>
       <div className='left'>
 
 
@@ -50,10 +55,15 @@ const Task = () => {
       </div>
 
 
-      <div className='right'>
+      {user.isAdmin? <div className='right'>
         <CreateTask tasks={tasks} setTasks={setTasks} />
-      </div>
-    </div>
+      </div>:<></>}
+     
+    </div>):<TicketPage/>}
+
+</>
+    
+    
   )
 }
 

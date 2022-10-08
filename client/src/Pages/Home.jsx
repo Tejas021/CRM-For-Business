@@ -26,7 +26,7 @@ useEffect(()=>{
    <>
    <Navbar/>
 
-   {user.isAdmin? <Dashboard/> : <TicketPage/>}
+   {(user.isAdmin || user.role==="employee")? <Dashboard/> : <TicketPage/>}
   {console.log('hello',users,tickets,tasks)}
 
    </>
