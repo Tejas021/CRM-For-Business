@@ -27,10 +27,20 @@ export default function SingleTicketTask() {
     const submitComment = () => {
         const data = location.state.comments.length < 1 ? [{ text: text, name: user.username }] : [...location.state.comments, { text: text, name: user.username }]
         publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { comments: data }).
-            then(r => {setComments(r.data.comments);
+            then(r => {
+                setComments(r.data.comments);
                 setText('')
             }).
             catch(err => console.log(err))
+    }
+
+    const closeTicket = () => {
+        console.log("state", location.state);
+        publicRequest.patch(`/ticket/updateTicket/${location.state._id}`, { status: 'closed' }).then(r => {
+            console.log(r.data);
+            navigate(`/tickets`);
+        })
+
     }
 
     return (
@@ -40,17 +50,34 @@ export default function SingleTicketTask() {
                 alignContent: 'center'
             }}>
 
-            
+
                 <Heading>{location.state.title}</Heading>
-               {user.isAdmin &&<>
-                {
-                   
-                   task?
-                   <Button onClick={() =>navigate(`/task/${task._id}`,{state:task}) } style={{ height: '30px' }}>go to task</Button>:
-                   <Button onClick={() => setOpen(true)} style={{ height: '30px' }}>Create task</Button>
-                   
-               }
+                {user.isAdmin && location.state.status !== 'closed' && <>
+                    {
+
+                        task ?
+                            <Button onClick={() => navigate(`/task/${task._id}`, { state: task })} style={{ height: 'max-content', margin: '10px 0 10px auto', }}>go to task</Button> :
+                            <Button onClick={() => setOpen(true)} style={{ height: 'max-content', margin: '10px 0 10px auto', }}>Assign Ticket</Button>
+
+                    }
                 </>}
+                {
+                    user.role === 'client' &&
+                        user.email === location.state.assignedBy &&
+                        location.state.status !== 'closed' ?
+                        <Button
+                            style={{
+                                margin: '10px 0 10px auto',
+                                color: 'red',
+                                height: 'max-content'
+                            }}
+                            onClick={closeTicket}
+                            variant="outlined"
+                        >
+                            Close Ticket
+                        </Button> :
+                        null
+                }
             </div>
 
             <KeyValueContainer>
@@ -101,7 +128,8 @@ export default function SingleTicketTask() {
                     margin: '10px 0 10px auto'
                 }}
                     onClick={() => submitComment()}
-                    variant="contained">Submit</Button>
+                    variant="contained">Submit</Button
+                >
                 <hr />
             </div>
             <TaskModal location={location} task={task} setTask={setTask} open={open} setOpen={setOpen} />

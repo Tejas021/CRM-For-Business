@@ -18,12 +18,15 @@ const TicketCard = ({ data }) => {
 
   return (
     <div
-      onClick={() => {  
-        publicRequest.patch(`/ticket/updateTicket/${data._id}`,{status:'open'}).then(r=>{
-          console.log(r.data);
-          navigate(`/ticket/${r.data?._id}`,{state:r.data});
-        })
-        
+      onClick={() => {
+        if (data.status !== 'closed') {
+          publicRequest.patch(`/ticket/updateTicket/${data._id}`, { status: 'open' }).then(r => {
+            console.log(r.data);
+            navigate(`/ticket/${r.data?._id}`, { state: r.data });
+          })
+        }else{
+          navigate(`/ticket/${data?._id}`, { state: data });
+        }
       }}
       style={{
         backgroundColor: getColor(data?.status)
