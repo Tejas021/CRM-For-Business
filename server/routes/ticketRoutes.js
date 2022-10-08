@@ -1,3 +1,4 @@
+const {email} = require("../mail");
 const router = require("express").Router()
 const Ticket = require('../models/Tickets')
 
@@ -5,6 +6,7 @@ router.post('/createTicket', async (req, res) => {
     const newTicket = new Ticket(req.body);
     try {
         const savedTicket = await newTicket.save();
+        email(savedTicket);
         res.status(200).send(savedTicket)
     } catch (err) {
         res.status(500).send(err);
@@ -40,6 +42,15 @@ router.patch("/updateTicket/:id", async (req, res) => {
 router.get("/getAllTickets",async(req,res)=>{
     try{
         const tickets = await Ticket.find();
+        res.status(200).send(tickets)
+    } catch(err){
+        res.status(500).json(err)
+    }
+})
+
+router.post("/getUserTickets",async(req,res)=>{
+    try{
+        const tickets = await Ticket.find({assignedBy:req.body.email});
         res.status(200).send(tickets)
     } catch(err){
         res.status(500).json(err)
