@@ -7,6 +7,7 @@ const CreateTask = ({setTasks,tasks}) => {
   const user = useSelector(state=>state.auth.currentUser)
   const [taskData, setTaskData] = useState({ title: "", description: "", budget: "",hours:'',assignedTo:'',assignedBy:user.email });
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('task',taskData)
