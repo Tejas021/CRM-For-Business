@@ -13,7 +13,7 @@ const email = (data) =>{
     };
     
     sgMail.send(message)
-    .then(respose =>console.log('Email send'))
+    .then(respose =>console.log('Email send',respose))
     .catch((error) => console.log(error.message));
     
 }

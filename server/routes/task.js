@@ -63,4 +63,16 @@ router.get("/getTask/:id",async(req,res)=>{
  }
  })
 
+
+ router.post("/getTaskUser",async(req,res)=>{
+    try{
+       const task = await Task.find({assignedTo:req.body.username})
+       res.status(200).send(task)
+    } catch(err){
+         res.status(500).json(err)
+ }
+ })
+
+
+
 module.exports = router

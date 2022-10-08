@@ -52,6 +52,15 @@ router.get("/getAllTickets",async(req,res)=>{
     }
 })
 
+router.post("/getUserTickets",async(req,res)=>{
+    try{
+        const tickets = await Ticket.find({assignedBy:req.body.email});
+        res.status(200).send(tickets)
+    } catch(err){
+        res.status(500).json(err)
+    }
+})
+
 router.get("/getTicket/:id",async(req,res)=>{
     try{
        const ticket = await Ticket.findById(req.params.id)
