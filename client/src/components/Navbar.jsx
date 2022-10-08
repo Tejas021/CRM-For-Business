@@ -25,7 +25,7 @@ const navItems = [{ name: "Home", link: "" }, { name: "Tickets", link: "tickets"
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const user = useSelector(state=>state.auth.currentUser)
+  const user = useSelector(state => state.auth.currentUser)
   const dispatch = useDispatch()
   console.log(user)
 
@@ -33,15 +33,15 @@ function Navbar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const displayNav = (name)=> {
-    if(user.role === 'client' && name==='Tasks'){
+  const displayNav = (name) => {
+    if (user.role === 'client' && name === 'Tasks') {
       return 0
     } else {
       return 1
     }
-    
+
   }
-  
+
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -51,26 +51,26 @@ function Navbar(props) {
       <Divider />
       {
         user ?
-        <List>
-        {navItems.map((item) => (
+          <List>
+            {navItems.map((item) => (
 
-          <ListItem style={{
-           opacity: displayNav(item.name),
-          }} key={item.name} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
+              <ListItem style={{
+                opacity: displayNav(item.name),
+              }} key={item.name} disablePadding>
+                <ListItemButton sx={{ textAlign: 'center' }}>
+                  <Link to={`/${item.link}`}> <ListItemText primary={item.name} /></Link>
 
-            </ListItemButton>
-          </ListItem>
+                </ListItemButton>
+              </ListItem>
 
-        ))}
+            ))}
 
-        <ListItem>
-        <ListItemButton  sx={{ textAlign: 'center' }}>
-        <ListItemText primary={"LOGOUT"} />
-        </ListItemButton>
-        </ListItem>
-      </List> : ''
+            <ListItem>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={"LOGOUT"} />
+              </ListItemButton>
+            </ListItem>
+          </List> : ''
       }
     </Box >
   );
@@ -97,16 +97,22 @@ function Navbar(props) {
           >
             CRM
           </Typography>
-         { user && <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          {user && <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: '#fff',marginInline:"10px",opacity:displayNav(item.name) }}>
-              <Link style={{textDecoration:"none",color:"white"}} to={`/${item.link}`}>{item.name}</Link>
+              <Button key={item.name} sx={{ color: '#fff', marginInline: "10px", opacity: displayNav(item.name) }}>
+                <Link style={{ textDecoration: "none", color: "white" }} to={`/${item.link}`}>{item.name}</Link>
               </Button>
             ))}
 
-            <Button  sx={{ color: '#fff' }} onClick={()=>{dispatch(logout())}}>
-         LOGOUT
+            <Button sx={{ color: '#fff' }} onClick={() => { dispatch(logout()) }}>
+              LOGOUT
             </Button>
+            {
+              user.isAdmin &&
+              <Link to='/users'>
+              <Button sx={{ color: '#fff' }} >
+                Users
+              </Button></Link>}
           </Box>}
         </Toolbar>
       </AppBar>
