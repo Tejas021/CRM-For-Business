@@ -7,4 +7,5 @@ CRM for Business
 
 ## To run server
 1. npm install
-2. npm start
+2. create a .env file and add ur credentials
+3. npm start
