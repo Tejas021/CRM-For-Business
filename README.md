@@ -1,7 +1,7 @@
 # CRM-For-Business
 CRM for Business is a MERN stack project developed during VCET hackathon 2022. We decided to make the project open source and open for developers to use the product according to their needs and contribute to better the application.
 ## Project Screenshots
-![Uploading 1.png…]()
+![1](https://user-images.githubusercontent.com/64482548/198934494-588afac3-7504-4d39-86bf-96ae65c169fc.png)
 
  
 ## To run the client 
